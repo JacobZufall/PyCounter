@@ -8,11 +8,6 @@ root.geometry("600x500")
 root.iconbitmap("assets/icon.ico")
 root.resizable(False, False)
 
-# Calls custom Azure theme from /theme/
-# Repo: https://github.com/rdbende/Azure-ttk-theme
-root.tk.call("source", "azure.tcl")
-root.tk.call("set_theme", "dark")
-
 count_number: int = 0
 
 label = tk.Label(root, text=count_number)
