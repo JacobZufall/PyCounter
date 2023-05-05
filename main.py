@@ -1,57 +1,27 @@
 import tkinter as tk
-import tkinter.ttk as ttk
-
-root = tk.Tk()
-
-root.title("PyCounter")
-root.geometry("600x500")
-root.iconbitmap("assets/icon.ico")
-root.resizable(False, False)
-
-count_number: int = 0
-
-label = tk.Label(root, text=count_number)
-label.grid(row=0, rowspan=2, column=0, columnspan=3, sticky="NESW")
+from incremental_button import IncrementalButton as ic_button
+import _g
 
 
-def increment_number(amount: int):
-    global label
-    global count_number
-
-    count_number += amount
-
-    label.config(text=count_number)
+global label
 
 
-def reset_number():
-    global label
-    global count_number
+class Main(tk.Frame):
+    def __init__(self, *args, **kwargs):
+        super(Main, self).__init__(self, *args, **kwargs)
+        self.pack(side="top", fill="both", expand=True)
 
-    count_number = 0
-    label.config(text=0)
+        label = tk.Label(root, text=_g.count_number)
+
+        plus_one = ic_button(root, amount=1)
 
 
-reset = ttk.Button(root, text="Reset", command=reset_number)
-reset.grid(row=2, column=0, columnspan=3, sticky="NESW")
-
-plus_one = ttk.Button(root, text="+1", command=lambda: increment_number(1))
-minus_one = ttk.Button(root, text="-1", command=lambda: increment_number(-1))
-plus_one.grid(row=0, column=3, sticky="NESW")
-minus_one.grid(row=0, column=4, sticky="NESW")
-
-plus_ten = ttk.Button(root, text="+10", command=lambda: increment_number(10))
-minus_ten = ttk.Button(root, text="-10", command=lambda: increment_number(-10))
-plus_ten.grid(row=1, column=3, sticky="NESW")
-minus_ten.grid(row=1, column=4, sticky="NESW")
-
-plus_hundred = ttk.Button(root, text="+100", command=lambda: increment_number(100))
-minus_hundred = ttk.Button(root, text="-100", command=lambda: increment_number(-100))
-plus_hundred.grid(row=2, column=3, sticky="NESW")
-minus_hundred.grid(row=2, column=4, sticky="NESW")
-
-for i in range(5):
-    root.grid_columnconfigure(i, weight=1)
-    if i < 3:
-        root.grid_rowconfigure(i, weight=1)
-
-root.mainloop()
+if __name__ == "__main__":
+    # Nothing inside this conditional needs to be changed.
+    root = tk.Tk()
+    root.title("PyCounter")
+    root.geometry("600x500")  # Default window size.
+    root.iconbitmap("assets/icon.ico")  # Application icon.
+    root.resizable(False, False)
+    Main(root)
+    root.mainloop()
